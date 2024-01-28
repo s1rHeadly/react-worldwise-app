@@ -18,8 +18,13 @@ const App = () => {
    <>
    {/* we could have a global header here */}
     <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/app" element={<AppLayout />} />
+      <Route index element={<Home />} />
+      <Route path="/app" element={<AppLayout />}>
+        <Route index element={<p>Cities</p>} />
+        <Route path="cities" element={<p>Cities</p>}/>
+        <Route path="countries" element={<p>Countries</p>}/>
+        <Route path="form" element={<p>Form</p>}/>
+      </Route>
       <Route path="/product" element={<Product />} />
       <Route path="/pricing" element={<Pricing />} />
       <Route path="/login" element={<Login />} />
