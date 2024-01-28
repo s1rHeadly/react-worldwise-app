@@ -1,11 +1,11 @@
-
 const PageNotFound = () => {
   return (
     <div>
-    <PageNotFound />
-    <h1>PageNotFound</h1>
+      <h1>Page not found 😢</h1>
     </div>
-  )
+  );
 }
 
-export default PageNotFound
+
+
+export default PageNotFound;
