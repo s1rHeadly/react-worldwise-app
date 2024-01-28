@@ -4,6 +4,9 @@ import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import Home from './pages/Home';
 import PageNotFound from './pages/PageNotFound';
+import AppLayout from './components/AppLayout';
+
+
 
 
 
@@ -14,9 +17,10 @@ const App = () => {
    <>
    {/* we could have a global header here */}
     <Routes>
-    <Route exact path="/" element={<Home />} />
-      <Route path="product" element={<Product />} />
-      <Route path="pricing" element={<Pricing />} />
+      <Route exact path="/" element={<Home />} />
+      <Route exact path="/app" element={<AppLayout />} />
+      <Route path="/product" element={<Product />} />
+      <Route path="/pricing" element={<Pricing />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
    {/* we could have a global footer here */}

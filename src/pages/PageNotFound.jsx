@@ -1,8 +1,10 @@
-import React from 'react'
 
 const PageNotFound = () => {
   return (
-    <div>PageNotFound</div>
+    <div>
+    <PageNotFound />
+    <h1>PageNotFound</h1>
+    </div>
   )
 }
 
