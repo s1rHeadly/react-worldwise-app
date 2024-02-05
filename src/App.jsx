@@ -18,9 +18,11 @@ const App = () => {
    <>
    {/* we could have a global header here */}
     <Routes>
+      {/* index lets the route know that this is the default component */}
       <Route index element={<Home />} />
       <Route path="/app" element={<AppLayout />}>
-        <Route index element={<p>Cities</p>} />
+          {/* The Route with the index element is the default for when the user lands on '/app' */}
+        <Route index element={<p>List of Cities</p>} /> 
         <Route path="cities" element={<p>Cities</p>}/>
         <Route path="countries" element={<p>Countries</p>}/>
         <Route path="form" element={<p>Form</p>}/>

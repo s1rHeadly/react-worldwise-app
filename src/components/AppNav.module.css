@@ -6,8 +6,12 @@
 .nav ul {
   list-style: none;
   display: flex;
-  background-color: var(--color-dark--2);
   border-radius: 7px;
+}
+
+nav li a{
+  background-color: var(--color-dark--2);
+  margin: 0 0.4rem;
 }
 
 .nav a:link,
