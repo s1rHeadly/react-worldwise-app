@@ -1,5 +1,5 @@
 
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 
 import Product from './pages/Product';
 import Pricing from './pages/Pricing';
@@ -11,6 +11,7 @@ import CityList from './components/CityList';
 import CountryList from './components/CountryList';
 import useFetchCities from './hooks/useFetch';
 import City from './components/City';
+import Form from './components/Form'
 
 
 const BASE_URL = 'http://localhost:8000'
@@ -32,13 +33,14 @@ const {cities, loading, error} = useFetchCities(`${BASE_URL}/cities`);
       {/* index lets the route know that this is the default component */}
       <Route index element={<Home />} />
       <Route path="/app" element={<AppLayout />}>
+          {/* NESTED /APP ROUTES */}
           {/* The Route with the index element is the default for when the user lands on '/app' */}
           {/* When the user selected /app/cities then that component will be displayed */}
-        <Route index element={<CityList cities={cities} isLoading={loading} hasError={error}/>} /> 
+        <Route index element={<Navigate replace to="cities"/>} /> 
         <Route path="cities" element={<CityList cities={cities} isLoading={loading} hasError={error}/>}/>
         <Route path="cities/:id"element={<City />}/>
         <Route path="countries" element={<CountryList cities={cities} isLoading={loading}/>}/>
-        <Route path="form" element={<p>Form</p>}/>
+        <Route path="form" element={<Form/>}/>
       </Route>
       <Route path="product" element={<Product />} />
       <Route path="pricing" element={<Pricing />} />

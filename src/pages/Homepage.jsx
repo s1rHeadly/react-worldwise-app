@@ -19,7 +19,7 @@ const Homepage = () => {
           you have wandered the world.
         </h2>
 
-        <Link to="/app" className="cta">Start tracking now</Link>
+        <Link to="/app" className="cta">Start tracking now on the App</Link>
       </section>
     </main>
   );

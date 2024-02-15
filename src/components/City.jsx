@@ -2,8 +2,10 @@ import styles from "./City.module.css";
 import formatDate from '../helpers/helpers';
 import { useParams} from "react-router";
 import { useSearchParams } from 'react-router-dom'
+import { useEffect } from "react";
 
 
+// This is the template for when the city is called and to display all the city details
 
 const City = () => {
 
@@ -15,6 +17,16 @@ const City = () => {
   const lng = searchParams.get('lng'); // get lng query from the url
 
 
+
+  useEffect(() => {
+      const getItem = async() => {
+          const response = await fetch(`http://localhost:8000/cities/${id}`)
+          const data = await response.json()
+          console.log(data)
+      }
+
+      getItem()
+  }, [id]);
 return(
   <>
     <h2>Current city with {id}</h2>

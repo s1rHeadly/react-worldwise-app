@@ -1,6 +1,6 @@
 import styles from './CityItem.module.css';
 import formatDate from '../helpers/helpers';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const CityItem = ({city}) => {
 
