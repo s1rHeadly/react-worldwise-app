@@ -1,10 +1,10 @@
 import styles from './CityList.module.css';
 import Spinner from './Spinner';
 import CityItem from './CityItem';
+import Message from './Message'
 
 
-
-const CityList = ({cities, isLoading, hasError}) => {
+const CityList = ({cities, isLoading}) => {
 
 // if is loading...
 if(isLoading){
@@ -14,8 +14,8 @@ if(isLoading){
 
 
 // if we have an error...
-if(!isLoading && cities.length < 0){
-  return <p>An `${hasError}` as occured</p>
+if(!isLoading && cities.length < 1){
+  return <Message message="Add a city by clicking on the map"/>
 }
 
 

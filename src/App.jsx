@@ -8,7 +8,9 @@ import PageNotFound from './pages/PageNotFound';
 import AppLayout from './components/AppLayout';
 import Login from './pages/Login';
 import CityList from './components/CityList';
+import CountryList from './components/CountryList';
 import useFetchCities from './hooks/useFetch';
+import City from './components/City';
 
 
 const BASE_URL = 'http://localhost:8000'
@@ -34,12 +36,13 @@ const {cities, loading, error} = useFetchCities(`${BASE_URL}/cities`);
           {/* When the user selected /app/cities then that component will be displayed */}
         <Route index element={<CityList cities={cities} isLoading={loading} hasError={error}/>} /> 
         <Route path="cities" element={<CityList cities={cities} isLoading={loading} hasError={error}/>}/>
-        <Route path="countries" element={<p>Countries</p>}/>
+        <Route path="cities/:id"element={<City />}/>
+        <Route path="countries" element={<CountryList cities={cities} isLoading={loading}/>}/>
         <Route path="form" element={<p>Form</p>}/>
       </Route>
-      <Route path="/product" element={<Product />} />
-      <Route path="/pricing" element={<Pricing />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="product" element={<Product />} />
+      <Route path="pricing" element={<Pricing />} />
+      <Route path="login" element={<Login />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
     
