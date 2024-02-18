@@ -21,7 +21,7 @@ const City = () => {
   const lng = searchParams.get('lng'); // get lng query from the url
 
 
-  // 2. use useFetch hook to get the dity
+  // 2. use useFetch hook to get the city
   const {data: city} = useFetch(`${BASE_URL}/cities/${id}`)
 
   // 3. get the city setter function from the context

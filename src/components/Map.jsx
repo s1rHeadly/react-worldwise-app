@@ -14,7 +14,7 @@ const Map = () => {
   
 
   function resetSearch(){
-   setSearchParams({
+   setSearchParams({ 
     lat: 20,
     lng:20
    })
