@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 const useFetchCities = (url) => { // need this url placeholder to put into where the fetch hook is being called
 
 
- const [cities, setCities] = useState([]);
+ const [data, setData] = useState([]);
  const [loading, setLoading] = useState(false);
  const [error, setError] = useState(null);
 
@@ -12,16 +12,15 @@ const useFetchCities = (url) => { // need this url placeholder to put into where
 
 //fetch for local url => move later to a hook
  useEffect(() => {
-      const citiesData = async(url) => {
+      const getData = async(url) => {
         setLoading(true)
         try {
           const response = await fetch(url);
           if(!response.ok) return
           
           if(response.status === 200){
-            const data = await response.json();
-            setCities(data)
-            
+            const results = await response.json();
+            setData(results)
           }
         
         } catch (error) {
@@ -31,12 +30,12 @@ const useFetchCities = (url) => { // need this url placeholder to put into where
           setLoading(false)
         }
       }
-      citiesData(url)
+      getData(url)
  
  }, [url]);
 
 
- return {cities, loading, error}
+ return {data, loading, error}
 }
 
 

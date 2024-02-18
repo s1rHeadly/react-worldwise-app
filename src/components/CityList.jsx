@@ -1,20 +1,25 @@
+import { useContext } from 'react';
 import styles from './CityList.module.css';
 import Spinner from './Spinner';
 import CityItem from './CityItem';
-import Message from './Message'
+import Message from './Message';
+import { CitiesContext } from '../context/CitiesContext';
 
 
-const CityList = ({cities, isLoading}) => {
+const CityList = () => {
+
+// importing the Cities Context
+ const {cities, loading} =  useContext(CitiesContext)
 
 // if is loading...
-if(isLoading){
+if(loading){
   return <Spinner />
 }
 
 
 
-// if we have an error...
-if(!isLoading && cities.length < 1){
+// if there are no list items
+if(!loading && cities.length < 1){
   return <Message message="Add a city by clicking on the map"/>
 }
 
