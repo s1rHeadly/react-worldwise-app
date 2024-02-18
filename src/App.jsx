@@ -1,5 +1,7 @@
 
 import {Routes, Route, Navigate} from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 import Product from './pages/Product';
 import Pricing from './pages/Pricing';
 import Home from './pages/Homepage';
@@ -8,18 +10,18 @@ import AppLayout from './components/AppLayout';
 import Login from './pages/Login';
 import CityList from './components/CityList';
 import CountryList from './components/CountryList';
-import useFetch from './hooks/useFetch';
 import City from './components/City';
 import Form from './components/Form'
 import { CitiesProvider } from './context/CitiesContext';
 
 
 
-const BASE_URL = 'http://localhost:8000'
+
 
 
 
 const App = () => {
+
 
   return (
    <>
