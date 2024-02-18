@@ -1,9 +1,16 @@
 import styles from "./City.module.css";
+import formatDate from '../helpers/helpers'
 import { useParams} from "react-router";
 import { useSearchParams } from 'react-router-dom'
 import { useContext, useEffect,  } from "react";
 import useFetch from '../hooks/useFetch'
 import { CitiesContext } from "../context/CitiesContext";
+import Button from "./Button";
+
+import { useNavigate} from "react-router-dom";
+
+
+
 
 const BASE_URL = 'http://localhost:8000'
 
@@ -25,7 +32,7 @@ const City = () => {
   const {data: city} = useFetch(`${BASE_URL}/cities/${id}`)
 
   // 3. get the city setter function from the context
-  const {setCurrentCity} = useContext(CitiesContext)
+  const {currentCity, setCurrentCity} = useContext(CitiesContext)
 
   // 4. set the current city with the data from the useFetch hook
   useEffect(() => {
@@ -33,52 +40,54 @@ const City = () => {
   }, [setCurrentCity, city]);
 
 
+const {cityName, emoji, date, notes,} = currentCity;
 
 
+const navigate = useNavigate();
 
-return(
-  <>
-    <h2>Current city with {id}</h2>
-    <h4>{lat || 0} {lng || 0}</h4>
-  </>
-)
-//   return (
-//     <div className={styles.city}>
-//       <div className={styles.row}>
-//         <h6>City name</h6>
-//         <h3>
-//           <span>{emoji}</span> {cityName}
-//         </h3>
-//       </div>
+function backOne(){
+  navigate(-1)
+}
 
-//       <div className={styles.row}>
-//         <h6>You went to {cityName} on</h6>
-//         <p>{formatDate(date || null)}</p>
-//       </div>
 
-//       {notes && (
-//         <div className={styles.row}>
-//           <h6>Your notes</h6>
-//           <p>{notes}</p>
-//         </div>
-//       )}
+if(currentCity)
+  return (
+    <div className={styles.city}>
+      <div className={styles.row}>
+        <h6>City name</h6>
+        <h3>
+          <span>{emoji}</span> {cityName}
+        </h3>
+      </div>
 
-//       <div className={styles.row}>
-//         <h6>Learn more</h6>
-//         <a
-//           href={`https://en.wikipedia.org/wiki/${cityName}`}
-//           target="_blank"
-//           rel="noreferrer"
-//         >
-//           Check out {cityName} on Wikipedia &rarr;
-//         </a>
-//       </div>
+      <div className={styles.row}>
+        <h6>You went to {cityName} on</h6>
+        <p>{formatDate(date || null)}</p>
+      </div>
 
-//       <div>
-//         <ButtonBack />
-//       </div>
-//     </div>
-//   );
+      {notes && (
+        <div className={styles.row}>
+          <h6>Your notes</h6>
+          <p>{notes}</p>
+        </div>
+      )}
+
+      <div className={styles.row}>
+        <h6>Learn more</h6>
+        <a
+          href={`https://en.wikipedia.org/wiki/${cityName}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Check out {cityName} on Wikipedia &rarr;
+        </a>
+      </div>
+
+      <div>
+       <Button selected="back" onClick={backOne}>Back</Button>
+      </div>
+    </div>
+  );
 }
 
 export default City;
