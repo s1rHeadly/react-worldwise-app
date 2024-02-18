@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import useFetch from '../hooks/useFetch' // import the useFetch hook
 
 
@@ -12,14 +12,20 @@ const CitiesContext = createContext();
 function CitiesProvider({children}){
 
     // fetch hook for cities => see useFetchCties file
-    const {data: cities, loading, error} = useFetch(`${BASE_URL}/cities`);  
+    const {data: cities, loading, error} = useFetch(`${BASE_URL}/cities`);
+
+    const [currentCity, setCurrentCity] = useState({});
+    
+  
 
 
     return(
       <CitiesContext.Provider value={{
           cities: cities,
           loading: loading,
-          error: error
+          error: error,
+          currentCity: currentCity,
+          setCurrentCity: setCurrentCity,
       }}>
 
         {children}

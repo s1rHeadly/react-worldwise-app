@@ -1,31 +1,41 @@
 import styles from "./City.module.css";
 import { useParams} from "react-router";
 import { useSearchParams } from 'react-router-dom'
-import { useEffect } from "react";
+import { useContext, useEffect,  } from "react";
+import useFetch from '../hooks/useFetch'
+import { CitiesContext } from "../context/CitiesContext";
 
+const BASE_URL = 'http://localhost:8000'
 
 // This is the template for when the city is called and to display all the city details
 
 const City = () => {
 
 
+// 1. get the id from the current city from when we click on this page
   const {id} = useParams();
 
+  // use search params to get lat and lng
   let [searchParams, setSearchParams] = useSearchParams(); // only gets the queries
   const lat = searchParams.get('lat'); // get the lat query from the url
   const lng = searchParams.get('lng'); // get lng query from the url
 
 
+  // 2. use useFetch hook to get the dity
+  const {data: city} = useFetch(`${BASE_URL}/cities/${id}`)
 
+  // 3. get the city setter function from the context
+  const {setCurrentCity} = useContext(CitiesContext)
+
+  // 4. set the current city with the data from the useFetch hook
   useEffect(() => {
-      const getItem = async() => {
-          const response = await fetch(`http://localhost:8000/cities/${id}`)
-          const data = await response.json()
-          console.log(data)
-      }
+    setCurrentCity(city)
+  }, [setCurrentCity, city]);
 
-      getItem()
-  }, [id]);
+
+
+
+
 return(
   <>
     <h2>Current city with {id}</h2>
