@@ -1,10 +1,14 @@
 import styles from './CityList.module.css';
 import Spinner from './Spinner';
 import CityItem from './CityItem';
-import Message from './Message'
+import Message from './Message';
+import { CitiesContext } from '../context/CitiesContext';
+import { useContext } from 'react';
 
 
-const CityList = ({cities, isLoading}) => {
+const CityList = () => {
+
+  const {cities, loading: isLoading} = useContext(CitiesContext)
 
 // if is loading...
 if(isLoading){
@@ -14,7 +18,7 @@ if(isLoading){
 
 
 // if we have an error...
-if(!isLoading && cities.length < 1){
+if(isLoading && cities?.length < 1){
   return <Message message="Add a city by clicking on the map"/>
 }
 

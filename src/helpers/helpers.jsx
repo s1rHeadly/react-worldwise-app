@@ -11,3 +11,4 @@ const formatDate = (date) =>
   export default formatDate
 
 
+  export const BASE_URL = 'http://localhost:8000';

@@ -1,10 +1,15 @@
 import styles from './CountryList.module.css';
 import Spinner from './Spinner';
 import CountryItem from './CountryItem';
-import Message from './Message'
+import Message from './Message';
+import { useContext } from 'react';
+import { CitiesContext } from '../context/CitiesContext';
 
 
-const CountryList = ({cities, isLoading}) => {
+const CountryList = () => {
+
+  const {cities, loading: isLoading} = useContext(CitiesContext)
+
 
 // if is loading...
 if(isLoading){

@@ -1,8 +1,14 @@
 import styles from "./City.module.css";
+import { useNavigate } from "react-router-dom";
 import formatDate from '../helpers/helpers';
 import { useParams} from "react-router";
 import { useSearchParams } from 'react-router-dom'
+import { useContext } from "react";
+import { CitiesContext } from "../context/CitiesContext";
 import { useEffect } from "react";
+import Spinner from "./Spinner";
+import Button from "./Button";
+
 
 
 // This is the template for when the city is called and to display all the city details
@@ -16,60 +22,60 @@ const City = () => {
   const lat = searchParams.get('lat'); // get the lat query from the url
   const lng = searchParams.get('lng'); // get lng query from the url
 
+  const {getCity, currentCity, loading} = useContext(CitiesContext)
 
 
   useEffect(() => {
-      const getItem = async() => {
-          const response = await fetch(`http://localhost:8000/cities/${id}`)
-          const data = await response.json()
-          console.log(data)
-      }
-
-      getItem()
+   getCity(id)
   }, [id]);
-return(
-  <>
-    <h2>Current city with {id}</h2>
-    <h4>{lat || 0} {lng || 0}</h4>
-  </>
-)
-//   return (
-//     <div className={styles.city}>
-//       <div className={styles.row}>
-//         <h6>City name</h6>
-//         <h3>
-//           <span>{emoji}</span> {cityName}
-//         </h3>
-//       </div>
 
-//       <div className={styles.row}>
-//         <h6>You went to {cityName} on</h6>
-//         <p>{formatDate(date || null)}</p>
-//       </div>
 
-//       {notes && (
-//         <div className={styles.row}>
-//           <h6>Your notes</h6>
-//           <p>{notes}</p>
-//         </div>
-//       )}
+  const {cityName, emoji, notes, date} = currentCity
 
-//       <div className={styles.row}>
-//         <h6>Learn more</h6>
-//         <a
-//           href={`https://en.wikipedia.org/wiki/${cityName}`}
-//           target="_blank"
-//           rel="noreferrer"
-//         >
-//           Check out {cityName} on Wikipedia &rarr;
-//         </a>
-//       </div>
+  const navigate = useNavigate()
 
-//       <div>
-//         <ButtonBack />
-//       </div>
-//     </div>
-//   );
+
+  if(loading){
+    return <Spinner />
+  }
+
+  return (
+    <div className={styles.city}>
+      <div className={styles.row}>
+        <h6>City name</h6>
+        <h3>
+          <span>{emoji}</span> {cityName}
+        </h3>
+      </div>
+
+      <div className={styles.row}>
+        <h6>You went to {cityName} on</h6>
+        <p>{formatDate(date || null)}</p>
+      </div>
+
+      {notes && (
+        <div className={styles.row}>
+          <h6>Your notes</h6>
+          <p>{notes}</p>
+        </div>
+      )}
+
+      <div className={styles.row}>
+        <h6>Learn more</h6>
+        <a
+          href={`https://en.wikipedia.org/wiki/${cityName}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Check out {cityName} on Wikipedia &rarr;
+        </a>
+      </div>
+
+      <div>
+      <Button selected="back" onClick={() => navigate(-1)}>Go back</Button>
+      </div>
+    </div>
+  );
 }
 
 export default City;
